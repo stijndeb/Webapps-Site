@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 //const config = require('./config/database');
 
 require('./models/category');
-require('./models/Comment');
+require('./models/comment');
 require('./models/post');
 require('./models/user');
 
