@@ -13,8 +13,8 @@ import {Observable} from 'rxjs/Rx';
 })
 export class AddPostComponent implements OnInit {
 @Output() public newPost = new EventEmitter<Post>();
-private post: FormGroup;
-private categorien: any[];
+public post: FormGroup;
+public categorien: any[];
 private categorie: any;
 private user: any;
   constructor(private fb: FormBuilder, private _postService: PostService, private _authService: AuthService, private _router: Router) { }

@@ -7,33 +7,33 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PostService {
-  private _appUrl = 'http://localhost:3000';
-
+  //private _appUrl = 'http://localhost:3000/';
+  private _appUrl = '';
   constructor(private http: Http) { }
 
 
   getAllPosts(): Observable<Post[]>{
-    return this.http.get(`${this._appUrl}/posts`).map(res => res.json().map(item => Post.fromJSON(item)));
+    return this.http.get(`${this._appUrl}posts`).map(res => res.json().map(item => Post.fromJSON(item)));
   }
 
   getPost(id): Observable<Post> {
     console.log(id);
-    return this.http.get(`${this._appUrl}/posts/${id}`).map(res => res.json()).map(item => Post.fromJSON(item));
+    return this.http.get(`${this._appUrl}posts/${id}`).map(res => res.json()).map(item => Post.fromJSON(item));
   }
 
   getCategorien(){
-    return this.http.get(`${this._appUrl}/categories`).map(res => res.json());
+    return this.http.get(`${this._appUrl}categories`).map(res => res.json());
   }
 
   addNewPost(post){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(`${this._appUrl}/posts/post`, post, {headers: headers})
+    return this.http.post(`${this._appUrl}posts/post`, post, {headers: headers})
       .map(res => res.json()).map(item => Post.fromJSON(item));
   }
 
   deletePost(id){
-    return this.http.delete(`${this._appUrl}/posts/${id}`)
+    return this.http.delete(`${this._appUrl}posts/${id}`)
       .map(res => res.json()).map(item => Post.fromJSON(item));
   }
 
