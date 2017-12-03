@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const config = require('../config/database');
 
 const CommentSchema =  mongoose.Schema({
     inhoud: {
