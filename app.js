@@ -31,7 +31,7 @@ const users = require('./routes/users');
 const posts = require('./routes/posts');
 const categories = require('./routes/categories');
 
-const port = process.env.PORT || 8080;
+//const port = process.env.PORT || 8080;
 //const port = 3000;
 
 
@@ -39,7 +39,9 @@ const port = process.env.PORT || 8080;
 app.use(cors());
 
 //set static folder
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'dist')));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -76,8 +78,24 @@ app.all('*', (req, res) => {
 });
 
 //Start sever
-app.listen(port, () => {
-    console.log('Server started on port ' + port);
-});
+//app.listen(port, () => {
+  //  console.log('Server started on port ' + port);
+//});
+
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+  });
+
+  app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+  
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+  });
 
 module.exports = app;
