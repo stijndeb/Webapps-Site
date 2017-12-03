@@ -1,0 +1,44 @@
+<div class="jumbotron text-center">
+  <h1>MoppenTapper</h1>
+  <div class="lead">
+  <p>Welkom op mijn site, hier kan je de beste mopjes van Belgie vinden!</p>
+  <p>Je kan alles lezen zonder in te loggen.</p>
+  <p>Indien je wenst te reageren of een beoordeling wilt geven, moet je eerst inloggen of registreren!</p>
+  <p>TODO: Comments deleten</p>
+  <p>TODO: Comments maken</p>
+  <p>TODO: Beoordeling geven/tonen</p>
+  <p>TODO: opdelen in verschillende categorien</p>
+  <p>TODO: authenticatie op alle paden</p>
+  <p>TODO: voor iedere gebruiker een verschillende homepagina?? :( </p>
+  <p>TODO: mooier zetten van alle schermen (mss pas op het laatste)</p>
+  <p>TODO: ONLINE PLAATSEN</p>
+</div>
+  <div>
+    <a class="btn btn-primary" [routerLink]="['/register']">Register</a>
+    <a class="btn btn-default" [routerLink]="['/login']">Login</a>
+  </div>
+</div>
+
+
+
+<div *ngFor="let post of posts">
+    <div class="card">
+      <div class="card-header">
+           {{post.title}}
+           <div class="icons">
+           <button (click)="delete(post)" class="btn btn-danger mb-3"><i class="fa fa-trash"></i></button>           
+          </div>
+          </div>
+      <div class="card-body">
+          <blockquote class="blockquote">
+              <p>{{post.inhoud}}</p>
+              <footer class="blockquote-footer">{{post.auteur}}</footer>
+          </blockquote>
+      <a class="card-link" [routerLink]="['/post-detail', post.id]">View details</a>      
+    </div>
+  </div>
+  <p>{{post.beoordeling}}</p>
+  <br>
+</div>
+
+

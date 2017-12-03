@@ -1,0 +1,18 @@
+<div class="card">
+    <h3 class="card-header">{{post.title}}</h3>
+  <div class='card-body'>
+      <p class="card-text">{{post.inhoud}}</p> 
+      <p class="card-text">{{post.auteur}}</p>
+      <p class="card-text">{{post.beoordeling}}</p>
+    </div>   
+</div>
+    <div *ngFor="let comment of comments">
+          <div class='card'>
+                <p class="card-header">{{comment.auteur.username}}</p> 
+                <div class='card-body'>
+                    <p class="card-text">{{comment.inhoud}}</p>
+                    <p class="card-text">{{post.beoordeling}}</p>
+                </div>
+                
+            </div>
+      </div>

@@ -1,0 +1,17 @@
+<form [formGroup]='post' (ngSubmit)='onSubmit()'>
+  <h3 class="ui header">add post</h3>
+  <div class="field">
+    <label for="title_id">titel:</label>
+    <input type="text" id="title_id" formControlName='title'>
+  </div>
+  <div class="field">
+    <label for="inhoud_id">inhoud:</label>
+    <input type="text" id="inhoud_id" formControlName="inhoud">
+  </div>
+  <div class="field">
+    <select class="form-control" id="categorie_id" formControlName='category'>
+      <option *ngFor='let categorie of categorien'>{{categorie.name}}</option>
+    </select>
+  </div>
+  <button type='submit' class="btn btn-success mt-2">add</button>
+</form>
