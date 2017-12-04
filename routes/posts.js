@@ -58,9 +58,23 @@ router.delete('/:id', (req,res,next) =>{
 
 //Delete comment
 router.delete('/comment/:id', (req,res,next) =>{
-    Comment.findByIdAndRemove(req.params.id, req.body, (err,comment) =>{
+    Comment.findById(req.params.id, (err,comment) =>{
         if(err) throw err;
-        res.json(comment);
+        console.log(comment);
+        Post.findById(comment.post, (err,post) => {
+            if(err) return next(err);
+            var index = post.comments.indexOf(comment.id);
+            console.log(index);
+            console.log(post.comments);
+            post.comments.splice(index,1);
+            post.save((err, post)=>{
+                if(err) throw err;
+                Comment.findByIdAndRemove(req.params.id, req.body, (err,comment)=> {
+                    if(err) return next(err);
+                    res.json(comment);
+                })
+            })
+        });
     });
 });
 
