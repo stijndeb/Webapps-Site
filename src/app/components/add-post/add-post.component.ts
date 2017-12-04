@@ -32,7 +32,7 @@ private user: any;
 
   onSubmit(){
     this.categorie = this.categorien.find(c => c.name == this.post.value.category);
-    console.log(this.user);
+    console.log(this.categorie);
     const post = new Post(this.post.value.title, this.post.value.inhoud, this.user.id, this.categorie._id);    
     this._postService.addNewPost(post).subscribe(() => this._router.navigateByUrl(''));
   }
