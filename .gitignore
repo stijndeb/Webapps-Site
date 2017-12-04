@@ -9,6 +9,7 @@
 
 # pass
 /config/database.js
+.env
 
 # IDEs and editors
 /.idea

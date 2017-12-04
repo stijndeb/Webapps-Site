@@ -6,7 +6,6 @@ let Comment = mongoose.model('Comment')
 
 //get all posts
 router.get('/alles', (req,res,next)=>{
-    console.log("alles");
     let query = Post.find().populate('category').populate({path: 'auteur', select: 'username'});
     query.exec((err, posts)=>{
         if(err) throw err;
@@ -20,8 +19,6 @@ router.get('/:id', (req,res,next) =>{
                     .populate({path: 'auteur', select: 'username'})
                     .populate('category');
     query.exec((err, post) =>{
-    console.log("hi");
-    console.log(post);
     if(err) return next(err);
         res.json(post);
     });
@@ -77,7 +74,6 @@ router.put('/:id/upvote', (req, res, next) => {
   });
   
 router.post('/:id/comments', (req, res, next) => {
-    
     let newComment = new Comment({
         inhoud: req.body.inhoud,
         auteur: req.body.auteur,

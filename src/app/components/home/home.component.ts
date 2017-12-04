@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   }
 
   delete(post){
-    if(confirm("Bent u zeker dat u deze post wilt verwijeren?")){
+    if(confirm("Bent u zeker dat u deze post wilt verwijderen?")){
       this.postService.deletePost(post.id).subscribe(item => this._posts = this._posts.filter(val => item.id !== val.id)
     );
     }

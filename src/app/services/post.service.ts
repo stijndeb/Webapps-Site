@@ -17,7 +17,6 @@ export class PostService {
   }
 
   getPost(id): Observable<Post> {
-    console.log(id);
     return this.http.get(`${this._appUrl}posts/${id}`).map(res => res.json()).map(item => Post.fromJSON(item));
   }
 
@@ -35,6 +34,18 @@ export class PostService {
   deletePost(id){
     return this.http.delete(`${this._appUrl}posts/${id}`)
       .map(res => res.json()).map(item => Post.fromJSON(item));
+  }
+
+  addNewComment(comment, id){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(`${this._appUrl}${id}/comments`, comment, {headers: headers})
+      .map(res => res.json()).map(item => Comment.fromJSON(item));
+  }
+
+  deleteComment(id){
+    return this.http.delete(`${this._appUrl}comment/${id}`)
+      .map(res => res.json()).map(item => Comment.fromJSON(item));
   }
 
 

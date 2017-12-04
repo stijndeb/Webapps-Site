@@ -20,22 +20,24 @@ private user: any;
   constructor(private fb: FormBuilder, private _postService: PostService, private _authService: AuthService, private _router: Router) { }
 
   ngOnInit() {
-    this._postService.getCategorien().subscribe((categorien) => this.categorien = categorien);
     this.user = this._authService.getUser();
+    this._postService.getCategorien().subscribe((categorien) => {this.categorien = categorien
 
     this.post = this.fb.group({
       title: ['', [Validators.required]],
       inhoud: ['', [Validators.required]],
-      category: ['', [Validators.required]]
+      category: [this.categorien[0].name, [Validators.required]]
+    })
+    });
+    this.post = this.fb.group({
+      title: [''],
+      inhoud: [''],
+      category: ['']
     })
   }
 
   onSubmit(){
-    this.categorie = this.categorien.find(c => c.name == this.post.value.category);
-    console.log(this.post.value.category);
-    console.log(this.post);
-    console.log(this.categorie);
-    console.log(this.categorien);
+    this.categorie = this.categorien.find(c => c.name === this.post.value.category);
     const post = new Post(this.post.value.title, this.post.value.inhoud, this.user.id, this.categorie._id);    
     this._postService.addNewPost(post).subscribe(() => this._router.navigateByUrl(''));
   }

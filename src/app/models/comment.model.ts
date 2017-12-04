@@ -7,7 +7,6 @@ export class Comment{
 
     static fromJSON(json): Comment{
         const comment = new Comment(json.inhoud, json.auteur.username, json.post, json.beoordeling);
-        console.log(json._auteur.username);
         comment._id = json._id;
         return comment;
     }

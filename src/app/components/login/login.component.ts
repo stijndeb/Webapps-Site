@@ -33,8 +33,6 @@ export class LoginComponent implements OnInit {
           id: data.user.id
         }*/
         this.authService.storeUserData(data.token, data.user);
-        console.log("login");
-        console.log(data.user);
         this.flashMessage.show('You are now logged in', {cssClass: 'alert-success', timeout: 5000});
         this.router.navigate(['dashboard']);
       }else{
