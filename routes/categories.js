@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Category = require('../models/category');
 
 //get all posts in the category
-router.get('/', (req,res,next) =>{
+router.get('/alles', (req,res,next) =>{
     Category.find((err,categorien) =>{
         if(err) throw err;
         res.json(categorien);

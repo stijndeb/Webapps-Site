@@ -5,7 +5,7 @@ let Post = mongoose.model('Post');
 let Comment = mongoose.model('Comment')
 
 //get all posts
-router.get('/', (req,res,next)=>{
+router.get('/alles', (req,res,next)=>{
     console.log("alles");
     let query = Post.find().populate('category').populate({path: 'auteur', select: 'username'});
     query.exec((err, posts)=>{

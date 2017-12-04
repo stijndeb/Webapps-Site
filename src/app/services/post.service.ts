@@ -13,7 +13,7 @@ export class PostService {
 
 
   getAllPosts(): Observable<Post[]>{
-    return this.http.get(`${this._appUrl}posts`).map(res => res.json().map(item => Post.fromJSON(item)));
+    return this.http.get(`${this._appUrl}posts/alles`).map(res => res.json().map(item => Post.fromJSON(item)));
   }
 
   getPost(id): Observable<Post> {
@@ -22,7 +22,7 @@ export class PostService {
   }
 
   getCategorien(){
-    return this.http.get(`${this._appUrl}categories`).map(res => res.json());
+    return this.http.get(`${this._appUrl}categories/alles`).map(res => res.json());
   }
 
   addNewPost(post){
