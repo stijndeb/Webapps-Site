@@ -1,11 +1,25 @@
 <div class="card">
-    <h3 class="card-header">{{post.title}}</h3>
-  <div class='card-body'>
-      <p class="card-text">{{post.inhoud}}</p> 
-      <p class="card-text">{{post.auteur}}</p>
-      <p class="card-text">{{post.beoordeling}}</p>
-    </div>   
+    <h3 class="card-header">
+         {{post.title}}
+         <div class="icons">
+         <button [disabled]="deleteknop" (click)="deletep(post)" class="btn btn-danger mb-3"><i class="fa fa-trash"></i></button>
+                  
+        </div>
+    </h3>
+    <div class="card-body">
+        <blockquote class="blockquote">
+            <p>{{post.inhoud}}</p>
+            <footer class="blockquote-footer">{{post.auteur}}</footer>
+        </blockquote>
+        <ngb-rating [(rate)]="average" [readonly]="readonly">
+            <ng-template let-fill="fill" let-index="index">
+              <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+            </ng-template>
+    </ngb-rating> <p>{{ post.average }}/10    ({{post.aantalRates}} stemmen)</p> 
+          <button [disabled]="readonly" (click)="addRating()">Rate</button>
+  </div>
 </div>
+<br>
 <button (click)="toggleIsComment()">Comment</button>
 <div *ngIf=isComment>
   <div class="card card-body">
@@ -18,19 +32,21 @@
       </form>
   </div>
 </div>
+<br>
     <div *ngFor="let comment of comments">
           <div class='card'>
                 <div class="card-header">
-                    {{comment.auteur.username}}
+                    {{comment.auteur.username}} 
                     <div class="icons">
                             <button (click)="delete(comment)" class="btn btn-danger mb-3"><i class="fa fa-trash"></i></button>           
                     </div>
                 </div> 
                 <div class='card-body'>
                     <p class="card-text">{{comment.inhoud}}</p>
-                    <p class="card-text">{{post.beoordeling}}</p>
+                    <p class="card-text">{{comment.beoordeling}}</p>
                 </div>
                 
             </div>
+            <br>
       </div>
       

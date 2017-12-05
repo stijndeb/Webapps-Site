@@ -10,6 +10,7 @@ require('./models/category');
 require('./models/comment');
 require('./models/post');
 require('./models/user');
+require('./models/rating');
 
 
 //connect to database

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers } from '@angular/http';
 import { Post } from '../models/post.model';
 import { Comment } from '../models/comment.model';
+import { Rating } from '../models/rating.model';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
@@ -46,6 +47,13 @@ export class PostService {
   deleteComment(id){
     return this.http.delete(`${this._appUrl}comment/${id}`)
       .map(res => res.json()).map(item => Comment.fromJSON(item));
+  }
+
+  addNewRating(rating, id){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(`${this._appUrl}${id}/rate`, rating, {headers: headers})
+      .map(res => res.json()).map(item => Post.fromJSON(item));
   }
 
 

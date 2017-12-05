@@ -23,6 +23,7 @@ import { PostDetailComponent } from './components/post-detail/post-detail.compon
 
 import {StarRatingModule} from 'angular-star-rating';
 import { AddPostComponent } from './components/add-post/add-post.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule,
     ReactiveFormsModule,
-    StarRatingModule.forRoot()
+    StarRatingModule.forRoot(),
+    NgbModule.forRoot()
   ],
   providers: [ValidateService, AuthService, AuthGuard, PostService],
   bootstrap: [AppComponent]

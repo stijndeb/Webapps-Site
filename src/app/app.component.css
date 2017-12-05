@@ -8937,3 +8937,17 @@
   margin-right: -14px;
   margin-top: -6px;
 }
+
+.star{
+  font-size: 1.5rem;
+  color: #e2d797;
+}
+.filled{
+  color: #ffd501;
+}
+.bad{
+  color: #deb0b0;
+}
+.filled.bad{
+  color: #ff1e1e;
+}

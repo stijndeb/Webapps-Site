@@ -22,6 +22,10 @@ export class HomeComponent implements OnInit {
   getPostList(){
     this.postService.getAllPosts().subscribe((res) =>{
       this._posts = res;
+      this._posts.sort((a,b)=>{
+        return a.average - b.average;
+      })
+      this._posts.reverse();
     }, (err) => {console.log(err);});
   }
 

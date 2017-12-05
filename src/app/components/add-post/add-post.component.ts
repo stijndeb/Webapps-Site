@@ -9,7 +9,7 @@ import {Observable} from 'rxjs/Rx';
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
-  styleUrls: ['./add-post.component.css']
+  styleUrls: ['../../app.component.css']
 })
 export class AddPostComponent implements OnInit {
 @Output() public newPost = new EventEmitter<Post>();

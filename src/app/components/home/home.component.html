@@ -5,6 +5,7 @@
   <p>Je kan alles lezen zonder in te loggen.</p>
   <p>Indien je wenst te reageren of een beoordeling wilt geven, moet je eerst inloggen of registreren!</p>
   <p>TODO: Beoordeling geven/tonen</p>
+  <p>user kan maar 1 keer rating geven, sorteer op rating</p>
   <p>TODO: opdelen in verschillende categorien</p>
   <p>TODO: authenticatie op alle paden</p>
   <p>TODO: max 10 posts op 1 pagina</p>
@@ -21,12 +22,12 @@
 
 <div *ngFor="let post of posts">
     <div class="card">
-      <div class="card-header">
+      <h3 class="card-header">
            {{post.title}}
            <div class="icons">
            <button (click)="delete(post)" class="btn btn-danger mb-3"><i class="fa fa-trash"></i></button>           
           </div>
-          </div>
+        </h3>
       <div class="card-body">
           <blockquote class="blockquote">
               <p>{{post.inhoud}}</p>
@@ -35,7 +36,7 @@
       <a class="card-link" [routerLink]="['/post-detail', post.id]">View details</a>      
     </div>
   </div>
-  <p>{{post.beoordeling}}</p>
+  <p>{{ post.average }}/10   ({{post.aantalRates}} stemmen)</p>
   <br>
 </div>
 

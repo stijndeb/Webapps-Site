@@ -15,10 +15,10 @@ const PostSchema = mongoose.Schema({
         ref: 'User',
         required: true
     },
-    beoordeling: {
-        type: Number,
-        default: 0,
-    },
+    beoordeling: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Rating'
+    }],
     category: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: "Category"
