@@ -2,12 +2,14 @@ export class Comment{
     private _id: number;
     private _inhoud: string;
     private _auteur: string;
+    private _auteurId: number;
     private _beoordeling: number;
     private _post: number;
 
     static fromJSON(json): Comment{
         const comment = new Comment(json.inhoud, json.auteur.username, json.post, json.beoordeling);
         comment._id = json._id;
+        comment._auteurId = json.auteur._id;
         return comment;
     }
 
@@ -36,6 +38,10 @@ export class Comment{
     
     set auteur(auteur: string){
         this._auteur = auteur;
+    }
+
+    get auteurId(): number{
+        return this._auteurId;
     }
 
     get post(): number{

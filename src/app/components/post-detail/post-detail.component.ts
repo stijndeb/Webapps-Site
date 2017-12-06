@@ -19,8 +19,9 @@ export class PostDetailComponent implements OnInit {
   public commentInhoud: string;
   isComment:boolean = false;
   average = 0;
-  readonly = false;
+  readonly = true;
   deleteknop = true;
+  commentknop = false;
 
   constructor(private postService: PostService, private route: ActivatedRoute,
              private _authService: AuthService, private _router: Router) { }
@@ -48,6 +49,7 @@ export class PostDetailComponent implements OnInit {
   }
 
   checkUser(){
+    if(this.user != null){
     this._post.beoordeling.forEach(x => {
       if(x.user == this.user.id){
         this.readonly = true;
@@ -55,8 +57,20 @@ export class PostDetailComponent implements OnInit {
     })
     if(this.user.id == this._post.auteurId){
       this.deleteknop = false;
+    }}else{
+      this.readonly = true;
+      this.deleteknop = true;
+      this.commentknop = true;
     }
   }
+  checkDelCom(comment){
+    if(this.user != null){
+      if(this.user.id == comment.auteur._id){
+        return false;
+      }
+    }return true;
+  }
+
 
   addComment(commentInhoud: string){
       const comment = new Comment(this.commentInhoud, this.user.id, this._post.id);
