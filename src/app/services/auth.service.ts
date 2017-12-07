@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {tokenNotExpired} from 'angular2-jwt';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class AuthService {
@@ -12,6 +13,7 @@ export class AuthService {
   constructor(private http:Http) { }
 
   registerUser(user){
+    console.log("appUrl: "+ this._appUrl);
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post(`${this._appUrl}users/register`, user, {headers: headers})
@@ -41,6 +43,38 @@ export class AuthService {
     this.authToken = token;
     this.user = user;
   }
+
+  checkEmailAvailable(email: string){
+    console.log("email check auth service");
+    return this.http.post(`${this._appUrl}users/checkemail`, {email: email})
+      .map(res => res.json())
+      .map(item => {
+        console.log("niet hier");
+        if(item.email === 'alreadyexists'){
+          return false;
+        }else{
+          return true;
+        }
+      });
+  }
+
+  checkUsernameAvailable(username: string){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    console.log("pass check auth service");
+    console.log("appurl: " + this._appUrl);
+    return this.http.post(`${this._appUrl}/users/checkusername`, {username: username}, {headers: headers})
+      .map(res => res.json())
+      .map(item => {
+        console.log("hier");
+        if(item.username === 'alreadyexists'){
+          return false;
+        }else{
+          return true;
+        }
+      });
+  }
+
 
   loadToken(){
     const token = localStorage.getItem('id_token');

@@ -14,6 +14,10 @@ const RatingSchema = mongoose.Schema({
     beoordeling: {
         type: Number,
         required: true
+    },
+    datum: {
+        type: Date,
+        default: Date.now
     }
 });
 

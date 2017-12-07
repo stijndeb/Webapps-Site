@@ -15,7 +15,7 @@
             <ng-template let-fill="fill" let-index="index">
               <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
             </ng-template>
-    </ngb-rating> <p>{{ post.average }}/10    ({{post.aantalRates}} stemmen)</p> 
+    </ngb-rating> <p>{{ post.averageRond }}/10    ({{post.aantalRates}} stemmen) score: {{post.scoreRond}}</p> 
           <button [disabled]="readonly" (click)="addRating()">Rate</button>
   </div>
 </div>

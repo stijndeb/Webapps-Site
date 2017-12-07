@@ -4,10 +4,12 @@ export class Rating{
     private _user: string;
     private _post: number;
     private _beoordeling: number;
+    private _datum: string;
 
     static fromJSON(json): Rating{
         const rating = new Rating(json.user, json.beoordeling, json.post);
         rating._id = json._id;
+        rating._datum = json.datum;
         return rating;
     }
 
@@ -36,6 +38,14 @@ export class Rating{
     set post(post: number){
         this._post = post;
     } 
+
+    get datum(): string{
+        return this.datum;
+    }
+
+    set datum(datum: string){
+        this._datum = datum;
+    }
 
 
     get beoordeling(): number{

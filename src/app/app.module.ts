@@ -24,6 +24,7 @@ import { PostDetailComponent } from './components/post-detail/post-detail.compon
 import {StarRatingModule} from 'angular-star-rating';
 import { AddPostComponent } from './components/add-post/add-post.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CategorieComponent } from './components/categorie/categorie.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
   {path: 'add-post', component: AddPostComponent, canActivate:[AuthGuard]},
   {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
-  {path: 'post-detail/:id', component: PostDetailComponent}
+  {path: 'post-detail/:id', component: PostDetailComponent, canActivate:[AuthGuard]},
+  {path: 'categorie/:id', component: CategorieComponent}
 ]
 
 @NgModule({
@@ -46,7 +48,8 @@ const appRoutes: Routes = [
     ProfileComponent,
     PostComponent,
     PostDetailComponent,
-    AddPostComponent
+    AddPostComponent,
+    CategorieComponent
   ],
   imports: [
     BrowserModule,

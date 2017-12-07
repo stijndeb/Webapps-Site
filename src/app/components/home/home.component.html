@@ -4,14 +4,15 @@
   <p>Welkom op mijn site, hier kan je de beste mopjes van Belgie vinden!</p>
   <p>Je kan alles lezen zonder in te loggen.</p>
   <p>Indien je wenst te reageren of een beoordeling wilt geven, moet je eerst inloggen of registreren!</p>
-  <p>TODO: delete knop in home page, mss ook beoordeling</p>
-  <p>TODO: opdelen in verschillende categorien</p>
+  <p>TODO: filter op: newest, hottest, most voted, most scored</p>
+  <p>TODO: My posts</p>
   <p>TODO: authenticatie op alle paden</p>
-  <p>TODO: max 10 posts op 1 pagina</p>
+  <p>TODO: add post validatie en register validatie (geen 2 zelfde usernames)</p>
+  <p>TODO: comment beoordeling</p>
   <p>TODO: voor iedere gebruiker een verschillende homepagina</p>
   <p>TODO: mooier zetten van alle schermen</p>
 </div>
-  <div>
+  <div *ngIf="!authService.loggedIn()">
     <a class="btn btn-primary" [routerLink]="['/register']">Register</a>
     <a class="btn btn-default" [routerLink]="['/login']">Login</a>
   </div>
@@ -32,8 +33,9 @@
       <a class="card-link" [routerLink]="['/post-detail', post.id]">View details</a>      
     </div>
   </div>
-  <p>{{ post.average }}/10   ({{post.aantalRates}} stemmen)</p>
+  <p>{{ post.averageRond }}/10   ({{post.aantalRates}} stemmen) score: {{post.scoreRond}}</p>
   <br>
 </div>
+<ngb-pagination [collectionSize]="totalPosts" [pageSize]="10" [(page)]="page"></ngb-pagination>  
 
 

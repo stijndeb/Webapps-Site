@@ -17,6 +17,10 @@ export class PostService {
     return this.http.get(`${this._appUrl}posts/alles`).map(res => res.json().map(item => Post.fromJSON(item)));
   }
 
+  getCatPosts(id): Observable<Post[]>{
+    return this.http.get(`${this._appUrl}posts/cat/${id}`).map(res => res.json().map(item => Post.fromJSON(item)));
+  }
+
   getPost(id): Observable<Post> {
     return this.http.get(`${this._appUrl}posts/${id}`).map(res => res.json()).map(item => Post.fromJSON(item));
   }

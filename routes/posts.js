@@ -15,6 +15,16 @@ router.get('/alles', (req,res,next)=>{
     })
 });
 
+router.get('/cat/:id', (req,res,next)=>{
+    let query = Post.find({category: req.params.id}).populate('category')
+                                        .populate({path: 'auteur', select: 'username'})
+                                        .populate('beoordeling');
+    query.exec((err, posts) =>{
+        if(err) throw err;
+        res.json(posts);
+    })
+});
+
 //get one post
 router.get('/:id', (req,res,next) =>{
     let query = Post.findById(req.params.id).populate({path: 'comments', populate: {path: 'auteur', select: 'username'}})

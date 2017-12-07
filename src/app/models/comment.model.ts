@@ -5,11 +5,13 @@ export class Comment{
     private _auteurId: number;
     private _beoordeling: number;
     private _post: number;
+    private _datum: string;
 
     static fromJSON(json): Comment{
         const comment = new Comment(json.inhoud, json.auteur.username, json.post, json.beoordeling);
         comment._id = json._id;
         comment._auteurId = json.auteur._id;
+        comment._datum = json.datum;
         return comment;
     }
 
@@ -50,6 +52,14 @@ export class Comment{
     
     set post(post: number){
         this._post = post;
+    }
+
+    get datum(): string{
+        return this.datum;
+    }
+
+    set datum(datum: string){
+        this._datum = datum;
     }
 
     get beoordeling(): number{

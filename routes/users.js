@@ -7,6 +7,7 @@ const User = require('../models/user');
 
 //Register
 router.post('/register',(req, res, next) => {
+    console.log("register werkt toch?");
     let newUser = new User({
         name: req.body.name,
         email: req.body.email,
@@ -66,6 +67,30 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 router.get('/validate',(req, res, next) => {
     res.send('VALIDATE');
 });
+
+router.post('/checkemail', (req, res, next) =>{
+    console.log("email check in js");
+    console.log("email: " + req.body.email);
+    User.find({email: req.body.email}, (err, result) =>{
+        if(result.length){
+            res.json({'email': 'alreadyexists'})
+        }else { res.json({'email': 'ok'})
+        }
+    });
+});
+
+router.post('/checkusername',(req, res, next) =>{
+    console.log("username check in js");
+    console.log("name:" + req.body.username);
+    User.find({username: req.body.username}, (err, result) =>{
+        if(result.length){
+            res.json({'username': 'alreadyexists'})
+        }else { res.json({'username': 'ok'})
+        }
+    });
+});
+
+
 
 module.exports = router;
 

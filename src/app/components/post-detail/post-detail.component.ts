@@ -50,9 +50,11 @@ export class PostDetailComponent implements OnInit {
 
   checkUser(){
     if(this.user != null){
+      this.readonly = false;
     this._post.beoordeling.forEach(x => {
       if(x.user == this.user.id){
-        this.readonly = true;
+        this.readonly = false;
+        //stond op true
       }
     })
     if(this.user.id == this._post.auteurId){
@@ -88,6 +90,8 @@ export class PostDetailComponent implements OnInit {
 
   toggleIsComment(){
     this.isComment = !this.isComment;
+    var score = this._post.score;
+    console.log(score);
   }
 
   delete(comment){

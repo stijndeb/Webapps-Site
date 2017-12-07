@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService} from '../../services/post.service';
 import { Post } from '../../models/post.model';
 import { Comment } from '../../models/comment.model';
-
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +11,10 @@ import { Comment } from '../../models/comment.model';
 })
 export class HomeComponent implements OnInit {
   private _posts: Post[];
+  page:number=1;
+  totalPosts: number;
 
-
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, public authService: AuthService) { }
 
   ngOnInit() {
     this.getPostList();
@@ -22,15 +23,16 @@ export class HomeComponent implements OnInit {
   getPostList(){
     this.postService.getAllPosts().subscribe((res) =>{
       this._posts = res;
+      this.totalPosts = this._posts.length;
       this._posts.sort((a,b)=>{
-        return a.average - b.average;
+        return a.score - b.score;
       })
       this._posts.reverse();
     }, (err) => {console.log(err);});
   }
 
   get posts(){
-    return this._posts;
+    return this._posts.slice((this.page-1)*10,this.page*10);
   }
 
   delete(post){
