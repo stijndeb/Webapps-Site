@@ -4,7 +4,8 @@ import {AuthService} from '../../services/auth.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {Router} from'@angular/router';
 import { Observable } from 'rxjs/Rx';
-import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, ValidatorFn} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators, FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-register',
@@ -23,49 +24,42 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.user = this.fb.group({
       name: ['', [Validators.required]],
-      username: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      username: ['', [Validators.required], this.validateUsername()],
+      email: ['', [Validators.required], this.validateEmail()],
       password: ['', [Validators.required]]
     });
   }
 
-  /*validateUsername(): ValidatorFn {
+  validateUsername(): ValidatorFn {
     return (control: AbstractControl): Observable<{ [key: string]: any }> => {
       return this.authService.checkUsernameAvailable(control.value).map(available => {
-        console.log("testje niet");
         if (available) {
           return null;
         }
         return { userAlreadyExists: true };
       })
     };
-  }*/
+  }
 
-  /*validateEmail(): ValidatorFn {
+  validateEmail(): ValidatorFn {
     return (control: AbstractControl): Observable<{ [key: string]: any }> => {
       return this.authService.checkEmailAvailable(control.value).map(available => {
-        console.log("testjee");
         if (available) {
           return null;
         }
         return { emailAlreadyExists: true };
       })
     };
-  }*/
+  }
+
+  
 
   onRegisterSubmit(){
-    
 
     if(!this.validateService.validateEmail(this.user.value.email)){
       this.flashMessage.show("invalid email", {cssClass: 'alert-danger', timeout: 5000});
       return false;
-    }else if(!this.authService.checkEmailAvailable(this.user.value.email)){
-      this.flashMessage.show("Email already in use", {cssClass: 'alert-danger', timeout: 5000});
-      return false;
-    }else if(!this.authService.checkUsernameAvailable(this.user.value.username)){
-      this.flashMessage.show("Username already in use", {cssClass: 'alert-danger', timeout: 5000});
-      return false;
-    }else{
+    }
 
       const user = {
         name: this.user.value.name,
@@ -83,6 +77,6 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/register']);
         }
       });
-    }
+    
   }
 }

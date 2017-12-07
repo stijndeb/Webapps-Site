@@ -5,10 +5,16 @@
   <div class="form-group">
     <label for="title_id">titel:</label>
     <input type="text" class="form-control" id="title_id" formControlName='title'>
+    <div class="text-danger" *ngIf='post.get("title").errors?.required && post.get("title").touched'>
+      Titel is required!
+    </div>
   </div>
   <div class="form-group">
     <label for="inhoud_id">inhoud:</label>
     <textarea class="form-control" id="inhoud_id" rows="3" style="margin-top: 0px; margin-bottom: 0px; height: 117px;" formControlName="inhoud"></textarea>
+  </div>
+  <div class="text-danger" *ngIf='post.get("inhoud").errors?.required && post.get("inhoud").touched'>
+    Inhoud is required!
   </div>
   <div class="form-group">
     <select class="form-control" id="categorie_id" formControlName='category'>
