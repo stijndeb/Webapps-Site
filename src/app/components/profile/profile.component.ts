@@ -15,17 +15,18 @@ export class ProfileComponent implements OnInit {
   totalPosts: number;
   user: any;
 
-  constructor(private postService: PostService,private authService: AuthService, private router: Router) { }
+  constructor(private postService: PostService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
       this.user = this.authService.getUser();
       this.postService.getMyPosts().subscribe((res) =>{
         this._posts = res;
         this.totalPosts = this._posts.length;
-        this._posts.sort((a,b)=>{
-          return a.score - b.score;
-        })
-        this._posts.reverse();
+        this._posts.sort((a,b) => {
+          if(a.datum > b.datum) return -1;
+          if(a.datum < b.datum) return 1;
+          return 0;
+        });
       }, (err) => {console.log(err);});
   }
 

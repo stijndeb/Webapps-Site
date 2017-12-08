@@ -10,7 +10,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
 import {ValidateService} from'./services/validate.service';
@@ -18,7 +17,6 @@ import {AuthService} from'./services/auth.service';
 import {PostService} from'./services/post.service';
 import {FlashMessagesModule} from'angular2-flash-messages';
 import {AuthGuard} from './guards/auth.guard';
-import { PostComponent } from './components/post/post.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
 
 import {StarRatingModule} from 'angular-star-rating';
@@ -31,7 +29,6 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'add-post', component: AddPostComponent, canActivate:[AuthGuard]},
-  {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   {path: 'post-detail/:id', component: PostDetailComponent},
   {path: 'categorie/:id', component: CategorieComponent}
@@ -44,9 +41,7 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    DashboardComponent,
     ProfileComponent,
-    PostComponent,
     PostDetailComponent,
     AddPostComponent,
     CategorieComponent
