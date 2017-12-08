@@ -33,7 +33,7 @@ const appRoutes: Routes = [
   {path: 'add-post', component: AddPostComponent, canActivate:[AuthGuard]},
   {path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
   {path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
-  {path: 'post-detail/:id', component: PostDetailComponent, canActivate:[AuthGuard]},
+  {path: 'post-detail/:id', component: PostDetailComponent},
   {path: 'categorie/:id', component: CategorieComponent}
 ]
 

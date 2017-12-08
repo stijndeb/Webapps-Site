@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
+
 let mongoose = require('mongoose');
 let Post = mongoose.model('Post');
 let Comment = mongoose.model('Comment');
@@ -38,7 +40,7 @@ router.get('/:id', (req,res,next) =>{
 });
 
 //new post
-router.post('/post', (req,res,next) =>{
+router.post('/post', passport.authenticate('jwt', {session:false}), (req,res,next) =>{
     let post = new Post({title: req.body._title, inhoud: req.body.inhoud, auteur: req.body.auteur, category: req.body.category })
     post.save((err,post)=>{
         if(err) return next(err);
@@ -47,7 +49,7 @@ router.post('/post', (req,res,next) =>{
 });
 
 //Edit post
-router.put('/:id', (req,res,next) =>{
+router.put('/:id', passport.authenticate('jwt', {session:false}), (req,res,next) =>{
     Post.findByIdAndUpdate(req.params.id, req.body, (err,post) =>{
         if(err) return next(err);
         res.json(post);
@@ -55,7 +57,7 @@ router.put('/:id', (req,res,next) =>{
 });
 
 //Delete post
-router.delete('/:id', (req,res,next) =>{
+router.delete('/:id', passport.authenticate('jwt', {session:false}), (req,res,next) =>{
     Post.findById(req.params.id, (err, post) => {
         if(err) throw err;
         Comment.remove({ _id: {$in: post.comments}}, (err) => {
@@ -72,7 +74,7 @@ router.delete('/:id', (req,res,next) =>{
 });
 
 //rate post
-router.post('/:id/rate', (req, res, next) => {
+router.post('/:id/rate', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     let newRating = new Rating({
         user: req.body._user,
         post: req.params.id,
@@ -93,7 +95,7 @@ router.post('/:id/rate', (req, res, next) => {
   });
   
 //new comment
-router.post('/:id/comments', (req, res, next) => {
+router.post('/:id/comments', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     let newComment = new Comment({
         inhoud: req.body.inhoud,
         auteur: req.body.auteur,
@@ -114,7 +116,7 @@ router.post('/:id/comments', (req, res, next) => {
   });
 
   //delete comment
-  router.delete('/comment/:id', (req,res,next) =>{
+  router.delete('/comment/:id', passport.authenticate('jwt', {session:false}), (req,res,next) =>{
     Comment.findById(req.params.id, (err,comment) =>{
         if(err) throw err;
         console.log(comment);

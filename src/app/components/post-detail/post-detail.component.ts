@@ -59,6 +59,7 @@ export class PostDetailComponent implements OnInit {
     })
     if(this.user.id == this._post.auteurId){
       this.deleteknop = false;
+      
     }}else{
       this.readonly = true;
       this.deleteknop = true;

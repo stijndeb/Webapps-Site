@@ -5,12 +5,13 @@ import { Comment } from '../models/comment.model';
 import { Rating } from '../models/rating.model';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+import {AuthService} from './auth.service';
 
 @Injectable()
 export class PostService {
   //private _appUrl = 'http://localhost:3000/';
   private _appUrl = '';
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authService: AuthService) { }
 
 
   getAllPosts(): Observable<Post[]>{
@@ -31,30 +32,39 @@ export class PostService {
 
   addNewPost(post){
     let headers = new Headers();
+    headers.append('Authorization', this.authService.token);
     headers.append('Content-Type', 'application/json');
     return this.http.post(`${this._appUrl}posts/post`, post, {headers: headers})
       .map(res => res.json()).map(item => Post.fromJSON(item));
   }
 
   deletePost(id){
-    return this.http.delete(`${this._appUrl}posts/${id}`)
+    let headers = new Headers();
+    headers.append('Authorization', this.authService.token);
+    headers.append('Content-Type', 'application/json');
+    return this.http.delete(`${this._appUrl}posts/${id}`, {headers: headers})
       .map(res => res.json()).map(item => Post.fromJSON(item));
   }
 
   addNewComment(comment, id){
     let headers = new Headers();
+    headers.append('Authorization', this.authService.token);
     headers.append('Content-Type', 'application/json');
     return this.http.post(`${this._appUrl}${id}/comments`, comment, {headers: headers})
       .map(res => res.json()).map(item => Comment.fromJSON(item));
   }
 
   deleteComment(id){
-    return this.http.delete(`${this._appUrl}comment/${id}`)
+    let headers = new Headers();
+    headers.append('Authorization', this.authService.token);
+    headers.append('Content-Type', 'application/json');
+    return this.http.delete(`${this._appUrl}comment/${id}`, {headers: headers})
       .map(res => res.json()).map(item => Comment.fromJSON(item));
   }
 
   addNewRating(rating, id){
     let headers = new Headers();
+    headers.append('Authorization', this.authService.token);
     headers.append('Content-Type', 'application/json');
     return this.http.post(`${this._appUrl}${id}/rate`, rating, {headers: headers})
       .map(res => res.json()).map(item => Post.fromJSON(item));

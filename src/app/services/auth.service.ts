@@ -67,6 +67,10 @@ export class AuthService {
       });
   }
 
+  get token(): string{
+    this.loadToken();
+    return this.authToken;
+  }
 
   loadToken(){
     const token = localStorage.getItem('id_token');
