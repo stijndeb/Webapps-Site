@@ -22,6 +22,13 @@ export class PostService {
     return this.http.get(`${this._appUrl}posts/cat/${id}`).map(res => res.json().map(item => Post.fromJSON(item)));
   }
 
+  getMyPosts(): Observable<Post []>{
+    let headers = new Headers();
+    headers.append('Authorization', this.authService.token);
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(`${this._appUrl}posts/myPosts/${this.authService.user.id}`, {headers: headers}).map(res => res.json().map(item => Post.fromJSON(item)));
+  }
+
   getPost(id): Observable<Post> {
     return this.http.get(`${this._appUrl}posts/${id}`).map(res => res.json()).map(item => Post.fromJSON(item));
   }

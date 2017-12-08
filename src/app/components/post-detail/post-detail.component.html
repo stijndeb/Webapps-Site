@@ -2,7 +2,7 @@
     <h3 class="card-header">
          {{post.title}}
          <div class="icons">
-         <button [disabled]="deleteknop" (click)="deletep(post)" class="btn btn-danger mb-3"><i class="fa fa-trash"></i></button>
+         <button [hidden]="deleteknop" (click)="deletep(post)" class="btn btn-danger mb-3"><i class="fa fa-trash"></i></button>
                   
         </div>
     </h3>
@@ -15,12 +15,12 @@
             <ng-template let-fill="fill" let-index="index">
               <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
             </ng-template>
-    </ngb-rating> <p>{{ post.averageRond }}/10    ({{post.aantalRates}} stemmen) score: {{post.scoreRond}}</p> 
-          <button [disabled]="readonly" (click)="addRating()">Rate</button>
+    </ngb-rating> <p>{{ post.averageRond }}/10    ({{post.aantalRates}} stemmen)</p> 
+          <button class="btn btn-success" [disabled]="readonly" (click)="addRating()">Rate</button>
   </div>
 </div>
 <br>
-<button [disabled]="commentknop" (click)="toggleIsComment()">Comment</button>
+<button class="btn btn-info" [disabled]="commentknop" (click)="toggleIsComment()">Comment</button>
 <div *ngIf=isComment>
   <div class="card card-body">
       <form (submit)="addComment(commentInhoud)">
@@ -28,7 +28,7 @@
               <label for="commentInhoud">Inhoud: </label>
               <input type="text" class="form-control" [(ngModel)]="commentInhoud" name="commentInhoud">
           </div>
-          <button type="submit" class="btn btn-primary">Comment</button>
+          <button class="btn btn-success" type="submit">Comment</button>
       </form>
   </div>
 </div>
@@ -38,12 +38,11 @@
                 <div class="card-header">
                     {{comment.auteur.username}} 
                     <div class="icons">
-                            <button [disabled]="checkDelCom(comment)" (click)="delete(comment)" class="btn btn-danger mb-3"><i class="fa fa-trash"></i></button>           
+                            <button [hidden]="checkDelCom(comment)" (click)="delete(comment)" class="btn btn-danger mb-3"><i class="fa fa-trash"></i></button>           
                     </div>
                 </div> 
                 <div class='card-body'>
                     <p class="card-text">{{comment.inhoud}}</p>
-                    <p class="card-text">{{comment.beoordeling}}</p>
                 </div>
                 
             </div>

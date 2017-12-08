@@ -53,8 +53,7 @@ export class PostDetailComponent implements OnInit {
       this.readonly = false;
     this._post.beoordeling.forEach(x => {
       if(x.user == this.user.id){
-        this.readonly = false;
-        //stond op true
+        this.readonly = true;
       }
     })
     if(this.user.id == this._post.auteurId){

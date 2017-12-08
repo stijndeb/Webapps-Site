@@ -42,6 +42,27 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  hottest(){
+    this._posts.sort((a,b)=>{
+      return a.score - b.score;
+    })
+    this._posts.reverse();
+  }
+
+  nieuwste(){
+    this._posts.sort((a,b) => {
+      if(a.datum > b.datum) return -1;
+      if(a.datum < b.datum) return 1;
+      return 0;
+    });
+  }
+
+  beste(){
+    this._posts.sort((a,b)=>{
+      return a.average - b.average;
+    }).reverse();
+  }
+
 
 
 }

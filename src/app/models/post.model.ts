@@ -9,15 +9,14 @@ export class Post{
     private _auteurId: number;
     private _beoordeling: Rating[];
     private _category: string;
-    private _datum: string;
+    private _datum: Date;
     private _comments: Comment[];
 
     static fromJSON(json): Post{
-        console.log(json);
         const post = new Post(json.title, json.inhoud, json.auteur.username, json.category.name, json.beoordeling, json.comments);
         post._id = json._id;
         post._auteurId = json.auteur._id;
-        post._datum = json.datum;
+        post._datum = new Date(json.datum);
         return post;
     }
 
@@ -70,11 +69,11 @@ export class Post{
         this._category = category;
     }
 
-    get datum(): string{
-        return this.datum;
+    get datum(): Date{
+        return this._datum;
     }
 
-    set datum(datum: string){
+    set datum(datum: Date){
         this._datum = datum;
     }
 
@@ -114,12 +113,8 @@ export class Post{
         //2de = 9, 3de= 7, 4de= 4, 5de=2, 6-x = 1
         var dagScore: number;
         var today = new Date();
-        var datumlang: String[] = this._datum.split("-");
-        var jaar = datumlang[0];
-        var maand = datumlang[1];
-        var dag = datumlang[2].substring(0,2);
-        var daatuum = new Date(maand+"/"+dag+"/"+jaar);
-        var dagen = Math.ceil((today.getTime() - daatuum.getTime()) / (1000 * 3600 * 24));
+        
+        var dagen = Math.ceil((today.getTime() - this._datum.getTime()) / (1000 * 3600 * 24));
         switch(dagen){
             case 0: dagScore = 10; break;
             case 1: dagScore = 10; break;

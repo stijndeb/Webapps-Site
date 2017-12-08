@@ -5,3 +5,24 @@
     <li class="list-group-item">Email: {{user.email}}</li>    
   </ul>
 </div>
+<br>
+<br>
+<h3>Mijn mopjes:</h3>
+
+<div *ngFor="let post of posts">
+  <div class="card">
+    <h3 class="card-header">
+         {{post.title}}
+      </h3>
+    <div class="card-body">
+        <blockquote class="blockquote">
+            <p>{{post.inhoud}}</p>
+            <footer class="blockquote-footer">{{post.auteur}}</footer>
+        </blockquote>
+    <a class="card-link" [routerLink]="['/post-detail', post.id]">View details</a>      
+  </div>
+</div>
+<p>{{ post.averageRond }}/10   ({{post.aantalRates}} stemmen)</p>
+<br>
+</div>
+<ngb-pagination [collectionSize]="totalPosts" [pageSize]="10" [(page)]="page"></ngb-pagination> 

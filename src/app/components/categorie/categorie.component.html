@@ -1,3 +1,17 @@
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#" (click)="hottest()">Populair</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#" (click)="nieuwste()">Nieuw</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#" (click)="beste()">Beste</a>
+  </li>
+</ul>
+
+<h3 class="ui header">{{categorie.name}}</h3>
+
 <div *ngFor="let post of posts">
     <div class="card">
       <h3 class="card-header">
@@ -11,7 +25,7 @@
       <a class="card-link" [routerLink]="['/post-detail', post.id]">View details</a>      
     </div>
   </div>
-  <p>{{ post.averageRond }}/10   ({{post.aantalRates}} stemmen) score: {{post.scoreRond}}</p>
+  <p>{{ post.averageRond }}/10   ({{post.aantalRates}} stemmen)</p>
   <br>
 </div>
 <ngb-pagination [collectionSize]="totalPosts" [pageSize]="10" [(page)]="page"></ngb-pagination> 

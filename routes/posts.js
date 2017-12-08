@@ -27,6 +27,16 @@ router.get('/cat/:id', (req,res,next)=>{
     })
 });
 
+router.get('/myPosts/:id', passport.authenticate('jwt', {session:false}), (req,res,next)=>{
+    let query = Post.find({auteur: req.params.id}).populate('category')
+                                        .populate({path: 'auteur', select: 'username'})
+                                        .populate('beoordeling');
+    query.exec((err, posts) =>{
+        if(err) throw err;
+        res.json(posts);
+    })
+})
+
 //get one post
 router.get('/:id', (req,res,next) =>{
     let query = Post.findById(req.params.id).populate({path: 'comments', populate: {path: 'auteur', select: 'username'}})
@@ -119,12 +129,9 @@ router.post('/:id/comments', passport.authenticate('jwt', {session:false}), (req
   router.delete('/comment/:id', passport.authenticate('jwt', {session:false}), (req,res,next) =>{
     Comment.findById(req.params.id, (err,comment) =>{
         if(err) throw err;
-        console.log(comment);
         Post.findById(comment.post, (err,post) => {
             if(err) return next(err);
             var index = post.comments.indexOf(comment.id);
-            console.log(index);
-            console.log(post.comments);
             post.comments.splice(index,1);
             post.save((err, post)=>{
                 if(err) throw err;

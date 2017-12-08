@@ -1,24 +1,30 @@
-<div class="jumbotron text-center">
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#" (click)="hottest()">Populair</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#" (click)="nieuwste()">Nieuw</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#" (click)="beste()">Beste</a>
+  </li>
+</ul>
+<br>
+<div class="jumbotron text-center" *ngIf="!authService.loggedIn()">
   <h1>MoppenTapper</h1>
   <div class="lead">
   <p>Welkom op mijn site, hier kan je de beste mopjes van Belgie vinden!</p>
   <p>Je kan alles lezen zonder in te loggen.</p>
   <p>Indien je wenst te reageren of een beoordeling wilt geven, moet je eerst inloggen of registreren!</p>
-  <p>TODO: filter op: newest, hottest, most voted, most scored</p>
-  <p>TODO: My posts</p>
-  <p>TODO: comment beoordeling</p>
-  <p>TODO: voor iedere gebruiker een verschillende homepagina</p>
-  <p>TODO: mooier zetten van alle schermen</p>
-  <p>TODO: github ding</p>
-  <p>TODO: testen</p>
 </div>
-  <div *ngIf="!authService.loggedIn()">
-    <a class="btn btn-primary" [routerLink]="['/register']">Register</a>
-    <a class="btn btn-default" [routerLink]="['/login']">Login</a>
+  <div>
+    <a class="btn btn-primary" [routerLink]="['/register']">Registreer</a>
+    <a class="btn btn-default" [routerLink]="['/login']">Inloggen</a>
   </div>
 </div>
 
 
+<br>
 
 <div *ngFor="let post of posts">
     <div class="card">
@@ -33,7 +39,7 @@
       <a class="card-link" [routerLink]="['/post-detail', post.id]">View details</a>      
     </div>
   </div>
-  <p>{{ post.averageRond }}/10   ({{post.aantalRates}} stemmen) score: {{post.scoreRond}}</p>
+  <p>{{ post.averageRond }}/10   ({{post.aantalRates}} stemmen)</p>
   <br>
 </div>
 <ngb-pagination [collectionSize]="totalPosts" [pageSize]="10" [(page)]="page"></ngb-pagination>  
